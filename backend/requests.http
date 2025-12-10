@@ -1,0 +1,212 @@
+### Calculadora de CO2 - Exemplos de Requisições HTTP
+### Use com REST Client extension no VS Code ou similar
+
+@baseUrl = http://localhost:3000
+@contentType = application/json
+
+### 1. Health Check - Verificar se a API está funcionando
+GET {{baseUrl}}/api/health
+
+### 2. Calcular Emissão Rápida - Viagem de Carro
+POST {{baseUrl}}/api/calculate/quick
+Content-Type: {{contentType}}
+
+{
+  "origin": "São Paulo",
+  "destination": "Rio de Janeiro",
+  "distance": 430,
+  "transportType": "car"
+}
+
+### 3. Calcular Emissão Rápida - Viagem de Ônibus
+POST {{baseUrl}}/api/calculate/quick
+Content-Type: {{contentType}}
+
+{
+  "origin": "Salvador",
+  "destination": "Belo Horizonte",
+  "distance": 1200,
+  "transportType": "bus"
+}
+
+### 4. Calcular Emissão Rápida - Viagem de Bicicleta
+POST {{baseUrl}}/api/calculate/quick
+Content-Type: {{contentType}}
+
+{
+  "origin": "Centro",
+  "destination": "Zona Sul",
+  "distance": 15,
+  "transportType": "bicycle"
+}
+
+### 5. Calcular Emissão Rápida - Viagem de Moto
+POST {{baseUrl}}/api/calculate/quick
+Content-Type: {{contentType}}
+
+{
+  "origin": "Brasília",
+  "destination": "Anápolis",
+  "distance": 120,
+  "transportType": "motorcycle"
+}
+
+### 6. Calcular Emissões Detalhadas
+POST {{baseUrl}}/api/calculate/detailed
+Content-Type: {{contentType}}
+
+{
+  "transport": {
+    "carKm": 500,
+    "flightHours": 5,
+    "publicTransportKm": 200
+  },
+  "energy": {
+    "electricity": 150,
+    "naturalGas": 20
+  },
+  "consumption": {
+    "meatConsumption": 10,
+    "waste": 50
+  }
+}
+
+### 7. Calcular Emissões Detalhadas - Usuário Sustentável
+POST {{baseUrl}}/api/calculate/detailed
+Content-Type: {{contentType}}
+
+{
+  "transport": {
+    "carKm": 0,
+    "flightHours": 0,
+    "publicTransportKm": 400
+  },
+  "energy": {
+    "electricity": 80,
+    "naturalGas": 5
+  },
+  "consumption": {
+    "meatConsumption": 2,
+    "waste": 20
+  }
+}
+
+### 8. Calcular Emissões Detalhadas - Alto Impacto
+POST {{baseUrl}}/api/calculate/detailed
+Content-Type: {{contentType}}
+
+{
+  "transport": {
+    "carKm": 1500,
+    "flightHours": 20,
+    "publicTransportKm": 0
+  },
+  "energy": {
+    "electricity": 400,
+    "naturalGas": 60
+  },
+  "consumption": {
+    "meatConsumption": 30,
+    "waste": 150
+  }
+}
+
+### 9. Obter Fatores de Emissão
+GET {{baseUrl}}/api/emission-factors
+
+### 10. Obter Médias de Emissão
+GET {{baseUrl}}/api/averages
+
+### 11. Salvar Resultado - Viagem Rápida
+POST {{baseUrl}}/api/save-result
+Content-Type: {{contentType}}
+
+{
+  "resultType": "quick",
+  "data": {
+    "origin": "São Paulo",
+    "destination": "Rio de Janeiro",
+    "distance": 430,
+    "transportType": "Carro",
+    "emissionKg": 51.6,
+    "class": "medium"
+  },
+  "timestamp": "2025-12-10T15:30:00Z"
+}
+
+### 12. Salvar Resultado - Cálculo Detalhado
+POST {{baseUrl}}/api/save-result
+Content-Type: {{contentType}}
+
+{
+  "resultType": "detailed",
+  "data": {
+    "categories": {
+      "transport": {
+        "emissionKg": 60,
+        "percentage": 36.1
+      },
+      "energy": {
+        "emissionKg": 75,
+        "percentage": 45.2
+      },
+      "consumption": {
+        "emissionKg": 35,
+        "percentage": 21.1
+      }
+    },
+    "totals": {
+      "monthlyKg": 170,
+      "yearlyTons": 2.04
+    }
+  },
+  "timestamp": "2025-12-10T15:30:00Z"
+}
+
+### 13. Erro - Campo Obrigatório Faltando
+POST {{baseUrl}}/api/calculate/quick
+Content-Type: {{contentType}}
+
+{
+  "origin": "São Paulo",
+  "destination": "Rio de Janeiro"
+}
+
+### 14. Erro - Tipo de Transporte Inválido
+POST {{baseUrl}}/api/calculate/quick
+Content-Type: {{contentType}}
+
+{
+  "origin": "São Paulo",
+  "destination": "Rio de Janeiro",
+  "distance": 430,
+  "transportType": "invalid_type"
+}
+
+### 15. Erro - Distância Inválida
+POST {{baseUrl}}/api/calculate/quick
+Content-Type: {{contentType}}
+
+{
+  "origin": "São Paulo",
+  "destination": "Rio de Janeiro",
+  "distance": -100,
+  "transportType": "car"
+}
+
+### 16. Rota Inexistente (404)
+GET {{baseUrl}}/api/rota-inexistente
+
+###
+### NOTAS IMPORTANTES:
+### - Certifique-se de que o servidor está rodando (npm start)
+### - A API usa CORS habilitado para localhost:3000
+### - Todos os endpoints retornam JSON
+### - Use o padrão Content-Type: application/json para POST/PUT
+### 
+### TIPOS DE TRANSPORTE VÁLIDOS:
+### - bus (Ônibus) - 40g CO2/km
+### - car (Carro) - 120g CO2/km
+### - motorcycle (Moto) - 80g CO2/km
+### - bicycle (Bicicleta) - 0g CO2
+###
