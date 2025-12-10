@@ -9,8 +9,20 @@ const __dirname = dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+// Configurar CORS para aceitar requisições de múltiplas origens
+const corsOptions = {
+  origin: [
+    'http://localhost:3000',
+    'http://localhost:3001',
+    'https://alvesmariadefatima.github.io',
+    process.env.CORS_ORIGIN || '*'
+  ],
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+
 // Middleware
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // NÃO servir arquivos estáticos ainda - primeiro processar as rotas da API

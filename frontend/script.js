@@ -2,7 +2,18 @@
    Calculadora de Emissões de CO2 - Formulário Rápido com API
    =================================== */
 
-const API_BASE_URL = 'http://localhost:3001/api';
+// Detectar ambiente e configurar URL da API
+const API_BASE_URL = (() => {
+  // Em desenvolvimento local
+  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    return 'http://localhost:3001/api';
+  }
+  
+  // Em produção (GitHub Pages ou servidor remoto)
+  // Ajuste a URL de acordo com seu backend em produção
+  // Por exemplo, se usar Vercel, Heroku, Railway, etc.
+  return process.env.REACT_APP_API_URL || 'https://seu-backend-aqui.com/api';
+})();
 
 // Fatores de emissão por tipo de transporte (em kg CO2 por km)
 const transportEmissions = {
