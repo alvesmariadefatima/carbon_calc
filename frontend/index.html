@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de emissões de CO2 para ajudar a medir e reduzir o impacto ambiental">
+    <title>Calculadora de Emissões de CO2</title>
+    <link rel="stylesheet" href="../frontend/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu de navegação">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul id="nav-menu">
+                <li><a href="#home">Início</a></li>
+                <li><a href="#calculator">Calculadora</a></li>
+                <li><a href="#about">Sobre</a></li>
+                <li><a href="#contact">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home">
+            <article class="hero-section">
+                <h1>🌍 Calculadora de Emissões de CO2</h1>
+                <p>Calcule sua pegada de carbono e descubra como reduzir seu impacto ambiental.</p>
+                
+                <form id="quick-calculator" class="quick-calculator">
+                    <div class="form-group">
+                        <label for="origin">Origem da Viagem</label>
+                        <input 
+                            type="text" 
+                            id="origin" 
+                            name="origin" 
+                            placeholder="Ex: São Paulo"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="destination">Destino da Viagem</label>
+                        <input 
+                            type="text" 
+                            id="destination" 
+                            name="destination" 
+                            placeholder="Ex: Rio de Janeiro"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="distance">Distância (km)</label>
+                        <input 
+                            type="number" 
+                            id="distance" 
+                            name="distance" 
+                            min="0" 
+                            step="0.1"
+                            placeholder="Ex: 430"
+                            required
+                        >
+                    </div>
+
+                    <div class="transport-section">
+                        <label>Tipo de Transporte</label>
+                        <div class="transport-buttons">
+                            <button type="button" class="transport-btn" data-transport="bus" title="Ônibus">
+                                🚌 Ônibus
+                            </button>
+                            <button type="button" class="transport-btn" data-transport="car" title="Carro">
+                                🚗 Carro
+                            </button>
+                            <button type="button" class="transport-btn" data-transport="motorcycle" title="Moto">
+                                🏍️ Moto
+                            </button>
+                            <button type="button" class="transport-btn" data-transport="bicycle" title="Bicicleta">
+                                🚴 Bicicleta
+                            </button>
+                        </div>
+                        <input type="hidden" id="selected-transport" name="selected-transport" value="">
+                    </div>
+
+                    <div class="button-group">
+                        <button type="submit" class="btn-calculate">Calcular Emissão</button>
+                        <button type="reset" class="btn-clear">Limpar Formulário</button>
+                    </div>
+                </form>
+            </article>
+        </section>            
+        <section id="about">
+            <h2>ℹ️ Sobre a Calculadora</h2>
+            <article>
+                <p>
+                    Esta calculadora foi desenvolvida para ajudar você a entender e quantificar 
+                    sua pegada de carbono pessoal. Os dados utilizados são baseados em estudos 
+                    científicos e são aproximações que variam conforme a região e as práticas locais.
+                </p>
+                <h3>📚 Metodologia</h3>
+                <p>
+                    Os fatores de emissão utilizados foram obtidos de agências ambientais 
+                    internacionais como EPA (Environmental Protection Agency) e IPCC 
+                    (Intergovernmental Panel on Climate Change).
+                </p>
+            </article>
+        </section>
+        <section id="contact">
+            <h2>📧 Contato</h2>
+            <article>
+                <address>
+                    <p>Email: <a href="mailto:contato@carboncalc.com">contato@carboncalc.com</a></p>
+                    <p>Telefone: <a href="tel:+5511999999999">+55 11 99999-9999</a></p>
+                </address>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        <p>Desenvolvido com 💓 e carinho por DIO & Maria de Fátima</p>
+        <nav>
+            <ul>
+                <li><a href="#home">Voltar ao Topo</a></li>
+                <li><a href="#">Privacidade</a></li>
+                <li><a href="#">Termos de Uso</a></li>
+            </ul>
+        </nav>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
